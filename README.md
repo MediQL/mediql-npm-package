@@ -6,9 +6,9 @@ The `mediql` package contains only the functionality necessary to deliver a deve
 **Note:** this package is strictly for development mode. 
 
 # Usage
-- [] In your application's GraphQL Schema file or your file with resolvers...
-- [] Import the `postOriginResp` function from the `mediql` package using CommonJS module syntax.
-- [] Invoke the `postOriginResp` function inside each of your resolvers with specific arguments shown below:
+- [ ] In your application's GraphQL Schema file or your file with resolvers...
+- [ ] Import the `postOriginResp` function from the `mediql` package using CommonJS module syntax.
+- [ ] Invoke the `postOriginResp` function inside each of your resolvers with specific arguments shown below:
 ```javascript
 //import the postOriginResp function from the mediql package
 const { postOriginResp } = require('mediql');
@@ -56,10 +56,10 @@ module.exports = new GraphQLSchema({
   query: RootQuery,
 });
 ```
-- [] In your application's server file... 
-- [] Import the `postQueryResp` function from the `mediql` package using CommonJS module syntax.
-- [] Import the `graphqlHTTP` function from the `express-graphql` package.
-- [] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`,  and `extensions` to be able to call the `postQueryResp` function.
+- [ ] In your application's server file... 
+- [ ] Import the `postQueryResp` function from the `mediql` package using CommonJS module syntax.
+- [ ] Import the `graphqlHTTP` function from the `express-graphql` package.
+- [ ] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`,  and `extensions` to be able to call the `postQueryResp` function.
 ```javascript
 const express = require("express");
 
