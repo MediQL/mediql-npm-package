@@ -97,3 +97,5 @@ app.use(
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
 ```
+# Documentation
+See https://github.com/oslabs-beta/MediQL#readme
