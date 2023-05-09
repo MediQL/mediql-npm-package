@@ -1,7 +1,7 @@
 # mediql-npm-package
-Mediql is a GraphQL developer tool, built to work on top of graphiql, and delivers query response visualization, error indication, and the ability to observe original external API response objects which graphiql can not. 
+MediQL is a GraphQL developer tool, built to work on top of GraphiQL, an open-source web-based integrated development environment (IDE). MediQL takes it a step further by delivering query response visualization, error indication, and the ability to observe original external API response objects which GraphiQL can not. 
 
-The `mediql` package contains only the functionality necessary to deliver a developer's resolved external API responses as well as the GraphQL query response to mediql's server. 
+The `mediql` package contains only the functionality necessary to deliver a developer's resolved external API responses as well as the GraphQL query response to MediQL's server. 
 
 **Note:** this package is strictly for development mode. 
 
