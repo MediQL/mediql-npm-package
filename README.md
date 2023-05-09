@@ -1,2 +1,2 @@
-# mediql-npm-package
-mediql npm package
+# errorqller-npm-package
+errorqller npm package
