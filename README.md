@@ -24,7 +24,7 @@ const RootQuery = new GraphQLObjectType({
       async resolve(parent, args, context, info) {
         try {
 
-          //declare the response variable and assign it to the result of your fetch request to the external api url of your choice
+//declare the response variable assign it to the result of your fetch request to the external api url of your choice
           const response = await fetch(
             `https://swapi.dev/api/films/${args.id}`,
             {
@@ -32,10 +32,10 @@ const RootQuery = new GraphQLObjectType({
             }
           );
 
-          //declare the parsedResponse variable as the parsed JSON response of your previous response variable
+//declare the parsedResponse variable as the parsed JSON response of your previous response variable
           const parsedResponse = await response.json();
           
-          //invoke mediql's packaged function with the arguments of response, parsedResponse, and info respectively.
+//invoke mediql's packaged function with the arguments of response, parsedResponse, and info respectively.
           postOriginResp(response, parsedResponse, info);
 
           return parsedResponse;
