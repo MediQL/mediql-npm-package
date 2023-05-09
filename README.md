@@ -6,8 +6,12 @@ The `mediql` package contains only the functionality necessary to deliver a deve
 **Note:** this package is strictly for development mode. 
 
 # Usage
+- [] In your application's GraphQL Schema file or your file with resolvers...
+- [] Import the `postOriginResp` function from the `mediql` package using CommonJS module syntax.
+- [] Invoke the `postOriginResp` function inside each of your resolvers with specific arguments shown below:
 ```javascript
-const {postOriginResp} = require('mediql')
+//import the postOriginResp function from the mediql package
+const { postOriginResp } = require('mediql');
 
 const {
   GraphQLObjectType,
@@ -51,4 +55,45 @@ const RootQuery = new GraphQLObjectType({
 module.exports = new GraphQLSchema({
   query: RootQuery,
 });
+```
+- [] In your application's server file... 
+- [] Import the `postQueryResp` function from the `mediql` package using CommonJS module syntax.
+- [] Import the `graphqlHTTP` function from the `express-graphql` package.
+- [] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`,  and `extensions` to be able to call the `postQueryResp` function.
+```javascript
+const express = require("express");
+
+//Import the graphqlHTTP function from the express-graphql package
+const { graphqlHTTP } = require("express-graphql");
+
+//Import the postQueryResp function from the mediql package
+const { postQueryResp } = require("mediql");
+
+const app = express();
+
+//Import your GraphQL schema file and declare it as the variable schema
+const schema = require("./schema/schema.js");
+
+const cors = require("cors");
+app.use(cors());
+app.use(express.json())
+const PORT = 3900;
+
+//Set up the /graphql route (i.e.: http://localhost:${PORT}/graphql)
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+    context: ({ req }) => ({ req }),
+    extensions: async (
+      { document, variables, operationName, result }) => {
+      
+//Invoke postQueryResp with result argument
+      postQueryResp(result);
+    },
+  })
+);
+
+app.listen(PORT, console.log(`Server running on port ${PORT}`));
 ```
