@@ -1,5 +1,5 @@
 {
-  "name": "mediql-npm-package",
+  "name": "mediql",
   "version": "1.0.0",
   "description": "mediql npm package",
   "main": "index.js",

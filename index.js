@@ -15,7 +15,6 @@ function postQueryResp(queryResult) {
 }
 
 async function postOriginResp(ogResp, parsedResp, respInfo) {
-
   const responseObj = {
     alias: respInfo.path.key,
     parentNode: respInfo.fieldName,
