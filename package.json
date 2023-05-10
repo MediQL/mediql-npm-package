@@ -1,6 +1,6 @@
 {
   "name": "mediql",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "mediql npm package",
   "main": "index.js",
   "directories": {
