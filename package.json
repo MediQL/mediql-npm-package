@@ -2,6 +2,13 @@
   "name": "mediql",
   "version": "1.0.3",
   "description": "mediql npm package",
+  "keywords": [
+    "mediql",
+    "graphiql",
+    "graphql",
+    "express-graphql",
+    "graphqlhttp"
+  ],
   "main": "index.js",
   "directories": {
     "test": "test"
