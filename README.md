@@ -1,51 +1,49 @@
 # mediql-npm-package
-MediQL is a GraphQL developer tool, built to work on top of GraphiQL, an open-source web-based integrated development environment (IDE). MediQL takes it a step further by delivering query response visualization, error indication, and the ability to observe original external API response objects which GraphiQL can not. 
 
-The `mediql` package contains only the functionality necessary to deliver a developer's resolved external API responses as well as the GraphQL query response to MediQL's server. 
+MediQL is a GraphQL developer tool, built to work in conjuction with GraphiQL, an open-source web-based integrated development environment (IDE). The MediQL NPM package enhances the GraphiQL IDE by delivering query response visualization, error indication, and the ability to observe original external API response objects which GraphiQL can not.
 
-**Note:** this package is strictly for development mode. 
+The `mediql` package contains only the functionality necessary to deliver a developer's resolved external API responses as well as the GraphQL query response to MediQL's server.
+
+**Note:** this package is strictly for development mode.
 
 # Usage
+
 - [ ] In your application's GraphQL Schema file or your file with resolvers...
 - [ ] Import the `postOriginResp` function from the `mediql` package using CommonJS module syntax.
 - [ ] Invoke the `postOriginResp` function inside each of your resolvers with specific arguments shown below:
+
 ```javascript
 //import the postOriginResp function from the mediql package
 const { postOriginResp } = require('mediql');
 
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLSchema,
-} = require("graphql");
+const { GraphQLObjectType, GraphQLString, GraphQLSchema } = require('graphql');
 
 const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
+  name: 'RootQueryType',
   fields: {
     Movie: {
       type: SwapiMovieType,
       args: { id: { type: GraphQLString } },
       async resolve(parent, args, context, info) {
         try {
-
-//declare the response variable assign it to the result of your fetch request to the external api url of your choice
+          //declare the response variable assign it to the result of your fetch request to the external api url of your choice
           const response = await fetch(
             `https://swapi.dev/api/films/${args.id}`,
             {
-              headers: { "content-type": "application/json" },
+              headers: { 'content-type': 'application/json' },
             }
           );
 
-//declare the parsedResponse variable as the parsed JSON response of your previous response variable
+          //declare the parsedResponse variable as the parsed JSON response of your previously declared response variable
           const parsedResponse = await response.json();
-          
-//invoke mediql's packaged function with the arguments of response, parsedResponse, and info respectively.
+
+          //invoke mediql's packaged function with the arguments of response, parsedResponse, and info respectively.
           postOriginResp(response, parsedResponse, info);
 
           return parsedResponse;
         } catch (err) {
-          console.error("Error fetching movie:", err);
-          throw new Error("Unable to fetch movie");
+          console.error('Error fetching movie:', err);
+          throw new Error('Unable to fetch movie');
         }
       },
     },
@@ -56,40 +54,43 @@ module.exports = new GraphQLSchema({
   query: RootQuery,
 });
 ```
-- [ ] In your application's server file... 
+
+- [ ] In your application's server file...
 - [ ] Import the `postQueryResp` function from the `mediql` package using CommonJS module syntax.
 - [ ] Import the `graphqlHTTP` function from the `express-graphql` package.
-- [ ] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`,  and `extensions` to be able to call the `postQueryResp` function.
+- [ ] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`, and `extensions` to be able to call the `postQueryResp` function.
+
 ```javascript
-const express = require("express");
+
+// UTILIZE THE PROMPTS BELOW AS A MODEL
+
+const express = require('express');
 
 //Import the graphqlHTTP function from the express-graphql package
-const { graphqlHTTP } = require("express-graphql");
+const { graphqlHTTP } = require('express-graphql');
 
 //Import the postQueryResp function from the mediql package
-const { postQueryResp } = require("mediql");
+const { postQueryResp } = require('mediql');
 
 const app = express();
 
 //Import your GraphQL schema file and declare it as the variable schema
-const schema = require("./schema/schema.js");
+const schema = require('./schema/schema.js');
 
-const cors = require("cors");
+const cors = require('cors');
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 const PORT = 3900;
 
 //Set up the /graphql route (i.e.: http://localhost:${PORT}/graphql)
 app.use(
-  "/graphql",
+  '/graphql',
   graphqlHTTP({
     schema,
     graphiql: true,
     context: ({ req }) => ({ req }),
-    extensions: async (
-      { document, variables, operationName, result }) => {
-      
-//Invoke postQueryResp with result argument
+    extensions: async ({ document, variables, operationName, result }) => {
+      //Invoke postQueryResp with result argument
       postQueryResp(result);
     },
   })
@@ -97,5 +98,7 @@ app.use(
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
 ```
+
 # Documentation
+
 See https://github.com/oslabs-beta/MediQL#readme
