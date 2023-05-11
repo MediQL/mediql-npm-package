@@ -1,3 +1,4 @@
+//Sends query response to database
 function postQueryResp(queryResult) {
   fetch("http://localhost:3003/queryRespReceiver", {
     method: "POST",
@@ -14,6 +15,7 @@ function postQueryResp(queryResult) {
     });
 }
 
+//Sends original response to the database
 async function postOriginResp(ogResp, parsedResp, respInfo) {
   const responseObj = {
     alias: respInfo.path.key,
