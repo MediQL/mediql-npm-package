@@ -34,7 +34,7 @@ const RootQuery = new GraphQLObjectType({
             }
           );
 
-          //declare the parsedResponse variable as the parsed JSON response of your previous response variable
+          //declare the parsedResponse variable as the parsed JSON response of your previously declared response variable
           const parsedResponse = await response.json();
 
           //invoke mediql's packaged function with the arguments of response, parsedResponse, and info respectively.
@@ -61,6 +61,9 @@ module.exports = new GraphQLSchema({
 - [ ] Set up a route at the endpoint `/graphql` using Express and use the `graphqlHTTP()` middleware with arguments of `schema` which was declared beforehand, `graphiql` which enables GraphiQL, `context`, and `extensions` to be able to call the `postQueryResp` function.
 
 ```javascript
+
+// UTILIZE THE PROMPTS BELOW AS A MODEL
+
 const express = require('express');
 
 //Import the graphqlHTTP function from the express-graphql package
