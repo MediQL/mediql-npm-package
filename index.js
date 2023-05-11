@@ -1,5 +1,5 @@
 function postQueryResp(queryResult) {
-  fetch("http://localhost:3000/queryRespReceiver", {
+  fetch("http://localhost:3003/queryRespReceiver", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ async function postOriginResp(ogResp, parsedResp, respInfo) {
   };
 
 
-  await fetch("http://localhost:3000/originalRespReceiver", {
+  await fetch("http://localhost:3003/originalRespReceiver", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
