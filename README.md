@@ -98,8 +98,8 @@ app.use(
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
 ```
 # Documentation
-See https://github.com/oslabs-beta/MediQL#readme
-See https://www.npmjs.com/package/mediql
+- See https://github.com/oslabs-beta/MediQL#readme
+- See https://www.npmjs.com/package/mediql
 
 # **Co-Creators**
 
